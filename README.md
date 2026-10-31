@@ -1,7 +1,8 @@
 # AarogyaTrack — Every Visit Matters
 > **Hackathon Submission:** `Hacktoberfest-bhopal-AarogyaTrack`  
 > **Tagline:** Offline-First Clinical Record and Longitudinal Health Monitoring PWA for Travelling Medical Teams.  
-> 🎬 **[Watch Project Walkthrough Video](brag-output/brag.mp4)** &bull; 🖼️ **[Launch Video Kit &amp; Poster](brag-output/index.html)**
+> 🌐 **Live Demo (Vercel):** [https://hacktoberfest-bhopal-aarogya-track.vercel.app](https://hacktoberfest-bhopal-aarogya-track.vercel.app)  
+> ⚙️ **Backend API (Render):** [https://aarogyatrack.onrender.com](https://aarogyatrack.onrender.com)
 
 ---
 
