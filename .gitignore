@@ -35,3 +35,7 @@ Thumbs.db
 prisma/*.db
 
 .neon
+
+# Brag video work artifacts
+brag-output/work/
+
