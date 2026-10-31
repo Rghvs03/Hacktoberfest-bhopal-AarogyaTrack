@@ -68,9 +68,6 @@ export const Navbar: React.FC<NavbarProps> = ({ user, onLogout, onRefresh }) => 
           <div>
             <div className="flex items-center gap-2">
               <span className="font-bold text-lg text-slate-900 tracking-tight">AarogyaTrack</span>
-              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-clinical-50 text-clinical-700 border border-clinical-200 font-medium">
-                PWA • Offline-First
-              </span>
             </div>
             <p className="text-xs text-slate-500 font-medium">Every Visit Matters</p>
           </div>

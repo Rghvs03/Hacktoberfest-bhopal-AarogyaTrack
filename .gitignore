@@ -36,3 +36,7 @@ prisma/*.db
 
 .neon
 
+# Hyperframes artifacts
+.hyperframes/
+renders/
+
