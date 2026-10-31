@@ -88,7 +88,7 @@ Open **`http://localhost:5173`** in your browser.
 
 ---
 
-## 🎬 How to Demo for the Judges (3-Minute Script)
+## Walkthrough
 
 1. **Sign In:** Click **"Autofill Verified Demo Account"** to sign in as *Dr. Priya Sharma, MD*.
 2. **Explore Longitudinal Continuity:**
