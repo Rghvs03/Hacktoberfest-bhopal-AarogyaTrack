@@ -60,3 +60,4 @@ Logo & Tagline: **AarogyaTrack** — Built for Hacktoberfest Bhopal.
 
 ## Share copy (draft)
 "Zero internet in rural health camps? AarogyaTrack brings offline-first clinical records, voice-dictated Smart Rx writepads, and Google Gemini longitudinal trajectory analysis to travelling medical teams. Built for Hacktoberfest Bhopal."
+

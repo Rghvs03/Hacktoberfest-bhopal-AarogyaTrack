@@ -38,3 +38,4 @@ Check out the code and presentation walkthrough on GitHub:
 ## Discord / Short Pitch:
 **AarogyaTrack** is live! An offline-first clinical PWA that lets travelling doctors record consultations, dictate notes with real-time symptom extraction, print A5 prescription slips offline, and sync longitudinal health records into Google Gemini when back in signal range. Built with React 19, Dexie.js, Recharts, Neon Postgres, and Gemini 1.5 Flash.
 Repo: https://github.com/Rghvs03/Hacktoberfest-bhopal-AarogyaTrack
+

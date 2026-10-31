@@ -68,7 +68,9 @@ export const Navbar: React.FC<NavbarProps> = ({ user, onLogout, onRefresh }) => 
           <div>
             <div className="flex items-center gap-2">
               <span className="font-bold text-lg text-slate-900 tracking-tight">AarogyaTrack</span>
-
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-clinical-50 text-clinical-700 border border-clinical-200 font-medium">
+                PWA • Offline-First
+              </span>
             </div>
             <p className="text-xs text-slate-500 font-medium">Every Visit Matters</p>
           </div>
@@ -78,10 +80,11 @@ export const Navbar: React.FC<NavbarProps> = ({ user, onLogout, onRefresh }) => 
         <div className="flex items-center gap-3">
           {/* Connectivity Status Pill */}
           <div
-            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border ${isOnline
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border ${
+              isOnline
                 ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
                 : 'bg-amber-50 text-amber-800 border-amber-300 animate-pulse'
-              }`}
+            }`}
           >
             {isOnline ? <Wifi className="w-3.5 h-3.5 text-emerald-600" /> : <WifiOff className="w-3.5 h-3.5 text-amber-600" />}
             <span>{isOnline ? 'Online Sync Active' : 'Offline Mode (Local Dexie)'}</span>
@@ -120,4 +123,3 @@ export const Navbar: React.FC<NavbarProps> = ({ user, onLogout, onRefresh }) => 
     </header>
   );
 };
-

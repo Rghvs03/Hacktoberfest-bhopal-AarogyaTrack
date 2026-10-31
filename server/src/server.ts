@@ -29,6 +29,17 @@ app.get('/api/v1/health', (_req, res) => {
   });
 });
 
+// Root API Welcome & Status
+app.get('/', (_req, res) => {
+  res.json({
+    status: 'online',
+    service: 'AarogyaTrack API',
+    frontend: 'https://hacktoberfest-bhopal-aarogya-track.vercel.app',
+    healthCheck: '/api/v1/health',
+    message: 'Backend is active and serving clinical records.',
+  });
+});
+
 // Register Domain Routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/patients', patientRoutes);

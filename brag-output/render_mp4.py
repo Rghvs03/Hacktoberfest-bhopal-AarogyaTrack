@@ -81,3 +81,4 @@ subprocess.run(cmd_poster, check=True, stdout=subprocess.DEVNULL, stderr=subproc
 
 print("Video successfully rendered to:", MP4_OUT)
 print("Poster image saved to:", POSTER_OUT)
+
