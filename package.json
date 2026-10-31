@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "AarogyaTrack — Offline-First Longitudinal Clinical Record & Health Monitoring PWA",
   "scripts": {
+    "build": "npm --prefix client install && npm --prefix client run build && npm --prefix server install && npm --prefix server run prisma:generate && npm --prefix server run build",
+    "start": "node server/dist/server.js",
     "dev:server": "npm --prefix server run dev",
     "dev:client": "npm --prefix client run dev",
     "build:server": "npm --prefix server run build",

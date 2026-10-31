@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import fs from 'fs';
 import { config } from './config';
 import authRoutes from './routes/auth';
 import patientRoutes from './routes/patients';
@@ -33,6 +35,18 @@ app.use('/api/v1/patients', patientRoutes);
 app.use('/api/v1/consultations', consultationRoutes);
 app.use('/api/v1/sync', syncRoutes);
 app.use('/api/v1/ai', aiRoutes);
+
+// Production Static Assets (Unified Full-Stack Deployment)
+const clientDistPath = path.resolve(__dirname, '../../client/dist');
+if (fs.existsSync(clientDistPath)) {
+  app.use(express.static(clientDistPath));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) {
+      return next();
+    }
+    res.sendFile(path.join(clientDistPath, 'index.html'));
+  });
+}
 
 // Global Error Handler
 app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {

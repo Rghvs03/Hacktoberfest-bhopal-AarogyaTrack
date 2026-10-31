@@ -1,7 +1,7 @@
 import { localDb, LocalConsultation, LocalPatient, SyncOutboxItem } from './db';
 export type { LocalConsultation, LocalPatient, SyncOutboxItem };
 
-const API_BASE = '/api/v1';
+const API_BASE = (import.meta.env.VITE_API_BASE ? import.meta.env.VITE_API_BASE.replace(/\/$/, '') : '') + '/api/v1';
 
 export interface DoctorUser {
   id: string;
