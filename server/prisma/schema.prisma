@@ -1,0 +1,119 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String         @id @default(uuid())
+  email        String         @unique
+  name         String
+  passwordHash String
+  role         String         @default("DOCTOR") // DOCTOR, NURSE, ADMIN
+  isActive     Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  
+  consultations Consultation[]
+  auditEvents   AuditEvent[]
+}
+
+model Patient {
+  id             String         @id @default(uuid())
+  patientCode    String         @unique // e.g. AAR-2026-001
+  fullName       String
+  dateOfBirth    DateTime?
+  age            Int?
+  gender         String         // MALE, FEMALE, OTHER
+  village        String         // Locality / Village
+  contactNumber  String?
+  medicalHistory String?        // Chronic conditions, baseline history
+  allergies      String?
+  createdBy      String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  consultations  Consultation[]
+  aiSummaries    AISummary[]
+}
+
+model Consultation {
+  id                  String    @id // Client-generated UUID for offline capture
+  patientId           String
+  patient             Patient   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  doctorId            String
+  doctor              User      @relation(fields: [doctorId], references: [id])
+  consultationDate    DateTime  @default(now())
+  chiefComplaints     String
+  observations        String?
+  clinicianAssessment String    // Clinician authored diagnosis/assessment
+  treatmentPlan       String    // Clinician authored management plan
+  followUpDate        DateTime?
+  rawRxPadNotes       String?   // Original natural text if authored on Smart Rx Pad
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  isOfflineCreated    Boolean   @default(false)
+
+  vitals              Vital[]
+}
+
+model Vital {
+  id               String       @id @default(uuid())
+  consultationId   String
+  consultation     Consultation @relation(fields: [consultationId], references: [id], onDelete: Cascade)
+  systolicBP       Float?       // mmHg
+  diastolicBP      Float?       // mmHg
+  bloodGlucose     Float?       // mg/dL
+  glucoseContext   String?      // FASTING, RANDOM, POSTPRANDIAL
+  heartRate        Float?       // bpm
+  temperature      Float?       // Fahrenheit
+  oxygenSaturation Float?       // % SpO2
+  recordedAt       DateTime     @default(now())
+}
+
+model AISummary {
+  id                    String    @id @default(uuid())
+  patientId             String
+  patient               Patient   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  generatedBy           String    // e.g. "GEMINI" or "GROQ"
+  modelName             String
+  promptVersion         String    @default("v1.0")
+  overview              String
+  recordedConditions    String    // JSON string array
+  measurementTrends     String    // JSON string array
+  missingInformation    String    // JSON string array
+  clinicianReviewItems  String    // JSON string array
+  sourceConsultationIds String    // JSON string array of UUIDs
+  reviewStatus          String    @default("PENDING_REVIEW") // PENDING_REVIEW, APPROVED, REJECTED
+  reviewedBy            String?
+  reviewedAt            DateTime?
+  createdAt             DateTime  @default(now())
+}
+
+model AuditEvent {
+  id          String   @id @default(uuid())
+  actorUserId String?
+  actor       User?    @relation(fields: [actorUserId], references: [id])
+  action      String   // LOGIN, LOGOUT, CREATE_PATIENT, CREATE_CONSULTATION, AI_SUMMARY_GENERATE, SYNC_RECORD
+  entityType  String
+  entityId    String
+  metadata    String?  // Sanitized JSON string (no PII)
+  timestamp   DateTime @default(now())
+}
+
+model SyncOperation {
+  id                String    @id @default(uuid())
+  clientOperationId String    @unique // Client UUID idempotency key
+  userId            String
+  entityType        String    // e.g. "CONSULTATION"
+  entityId          String
+  operation         String    // CREATE, UPDATE
+  status            String    // SUCCESS, FAILED, PENDING
+  errorMessage      String?
+  createdAt         DateTime  @default(now())
+  processedAt       DateTime?
+}
+
